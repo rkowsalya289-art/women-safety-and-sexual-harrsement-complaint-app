@@ -487,5 +487,69 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 <!-- END COMPLAINT TRACKING CONNECTION -->
+<!-- ADMIN COMPLAINT STATUS UPDATE -->
+<section id="admin-status" style="padding:25px; margin:20px; background:#f3e8ff; border-radius:12px;">
+  <h2>Admin Panel - Complaint Status Update</h2>
+  <p>Enter the Complaint ID to update its status.</p>
+
+  <input
+    type="text"
+    id="adminComplaintID"
+    placeholder="Enter Complaint ID"
+    style="padding:12px; width:90%; max-width:350px;"
+  >
+
+  <br><br>
+
+  <select id="newComplaintStatus" style="padding:12px; width:90%; max-width:375px;">
+    <option value="Received">Received</option>
+    <option value="Under Review">Under Review</option>
+    <option value="Action Taken">Action Taken</option>
+    <option value="Resolved">Resolved</option>
+  </select>
+
+  <br><br>
+
+  <button onclick="updateComplaintStatus()"
+    style="padding:12px 20px; background:#702b91; color:white; border:0; border-radius:6px;">
+    Update Status
+  </button>
+
+  <p id="adminUpdateResult"></p>
+</section>
+
+<script>
+function updateComplaintStatus() {
+  const id = document.getElementById("adminComplaintID").value.trim();
+  const status = document.getElementById("newComplaintStatus").value;
+  const result = document.getElementById("adminUpdateResult");
+
+  const complaints = JSON.parse(
+    localStorage.getItem("womenComplaints") || "[]"
+  );
+
+  const complaint = complaints.find(c => c.id === id);
+
+  if (!id) {
+    result.textContent = "Please enter a Complaint ID.";
+    return;
+  }
+
+  if (!complaint) {
+    result.textContent = "Complaint ID not found.";
+    return;
+  }
+
+  complaint.status = status;
+
+  localStorage.setItem(
+    "womenComplaints",
+    JSON.stringify(complaints)
+  );
+
+  result.textContent = "Complaint status updated to: " + status;
+}
+</script>
+<!-- END ADMIN STATUS UPDATE -->
 </body>
 </html>
