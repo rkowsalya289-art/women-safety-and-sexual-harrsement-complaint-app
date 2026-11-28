@@ -1,71 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Women Safety & Development</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+body{background:#fff7fb;color:#333;line-height:1.6}
+header{background:linear-gradient(120deg,#702044,#d94f91);color:white;text-align:center;padding:30px 15px}
+header h1{font-size:28px}
+nav{background:#64143e;display:flex;flex-wrap:wrap;justify-content:center;padding:12px;gap:10px}
+nav a{color:white;text-decoration:none;padding:7px}
+nav a:hover{background:#a52d68;border-radius:5px}
+section{padding:30px 7%;scroll-margin-top:15px}
+h2{color:#8e245d;margin-bottom:15px}
+h3{color:#a52d68;margin-bottom:10px}
+.hero{text-align:center;background:#f9e1ee;padding:45px 20px}
+.hero h2{font-size:27px}
+.container{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.card{background:white;padding:20px;border-radius:10px;box-shadow:0 2px 10px #0001;margin-bottom:10px}
+button,.btn{display:inline-block;background:#a52d68;color:white;border:0;padding:11px 17px;border-radius:6px;text-decoration:none;cursor:pointer;margin:6px 3px}
+button:hover,.btn:hover{background:#741b49}
+.sos{background:#d62828;font-size:19px}
+input,select,textarea{width:100%;padding:11px;margin:7px 0 14px;border:1px solid #ccc;border-radius:6px}
+label{font-weight:bold}
+textarea{min-height:110px}
+.result{background:#f9e1ee;padding:13px;border-radius:7px;margin-top:12px;overflow-wrap:anywhere}
+.notice{background:#fff0d5;padding:13px;border-left:4px solid orange;margin:15px 0}
+footer{background:#64143e;color:white;text-align:center;padding:25px}
+.small{font-size:13px;color:#666}
+@media(max-width:600px){header h1{font-size:22px}section{padding:22px 5%}}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Women Safety & Development</h1>
+<p>Safety | Rights | Education | Employment | Empowerment</p>
+<p>One Platform for Every Woman in India</p>
+</header>
+
+<div style="text-align:center;padding:15px;background:white">
+<b>Select Your Indian Language</b>
+<div id="google_translate_element"></div>
+</div>
+
+<nav>
+<a href="#home">Home</a>
+<a href="#safety">Safety</a>
+<a href="#complaint">Complaint</a>
+<a href="#schemes">Schemes</a>
+<a href="#education">Education</a>
+<a href="#jobs">Employment</a>
+<a href="#legal">Legal Help</a>
+<a href="#help">Help</a>
+</nav>
+
+<section class="hero" id="home">
+<h2>Empowering Every Woman</h2>
+<p>A digital platform for women's safety, development, education, employment and rights.</p>
+<button onclick="goTo('safety')">Emergency Help</button>
+<button onclick="goTo('schemes')">Explore Schemes</button>
+</section>
+
+<section id="safety">
+<h2>1. Women Safety and Emergency Assistance</h2>
+<div class="container">
+<div class="card">
+<h3>Emergency SOS</h3>
+<p>In immediate danger, contact emergency services.</p>
+<button class="sos" onclick="callEmergency()">SOS - Call 112</button>
+</div>
+
+<div class="card">
+<h3>Emergency Helplines</h3>
+<p>112 - National Emergency Number</p>
+<p>181 - Women Helpline</p>
+<p>1930 - Cyber Financial Fraud</p>
+<p>1098 - Child Helpline</p>
+</div>
+
+<div class="card">
+<h3>Location Assistance</h3>
+<p>Display your current location.</p>
+<button onclick="getLocation()">Get My Location</button>
+<div class="result" id="locationResult">Location will appear here.</div>
+</div>
+
+<div class="card">
+<h3>Police Assistance</h3>
+<p>Contact emergency services for immediate help.</p>
+<a class="btn" href="tel:112">Call Emergency Services</a>
+</div>
+</div>
+<div class="notice">This prototype does not automatically transmit location or complaints to police.</div>
+</section>
+
+<section id="complaint">
+<h2>2. Online Harassment Complaint</h2>
+<p>Enter the details of the incident below.</p>
+
+<form id="complaintForm" onsubmit="submitComplaint(event)">
+<label>Complaint Type</label>
+<select id="complaintType" required>
+<option value="">Select complaint type</option>
+<option>Sexual Harassment</option>
+<option>Workplace Harassment</option>
+<option>Cyber Harassment</option>
+<option>Online Stalking</option>
+<option>Domestic Violence</option>
+<option>Public Place Harassment</option>
+<option>Physical Harassment</option>
+<option>Threats and Blackmail</option>
+<option>Other</option>
+</select>
+
+<label>State / Union Territory</label>
+<select id="complaintState" required>
+<option value="">Select State</option>
+<option>Tamil Nadu</option>
+<option>Kerala</option>
+<option>Karnataka</option>
+<option>Andhra Pradesh</option>
+<option>Telangana</option>
+<option>Maharashtra</option>
+<option>Gujarat</option>
+<option>Rajasthan</option>
+<option>Uttar Pradesh</option>
+<option>Madhya Pradesh</option>
+<option>West Bengal</option>
+<option>Delhi</option>
+<option>Bihar</option>
+<option>Odisha</option>
+<option>Punjab</option>
+<option>Haryana</option>
+<option>Assam</option>
+<option>Goa</option>
+<option>Jharkhand</option>
+<option>Chhattisgarh</option>
+<option>Himachal Pradesh</option>
+<option>Uttarakhand</option>
+<option>Meghalaya</option>
+<option>Manipur</option>
+<option>Mizoram</option>
+<option>Nagaland</option>
+<option>Tripura</option>
+<option>Sikkim</option>
+<option>Arunachal Pradesh</option>
+<option>Jammu and Kashmir</option>
+<option>Ladakh</option>
+<option>Chandigarh</option>
+<option>Puducherry</option>
+<option>Andaman and Nicobar Islands</option>
+<option>Lakshadweep</option>
+<option>Dadra and Nagar Haveli and Daman and Diu</option>
+</select>
+
+<label>Describe Your Complaint</label>
+<textarea id="complaintDescription" placeholder="Enter your complaint here..." required></textarea>
+
+<label>Contact Email (Optional)</label>
+<input type="email" id="complaintEmail" placeholder="Enter email">
+
+<label><input type="checkbox" id="anonymous" style="width:auto"> Submit anonymously in this demo</label>
+
+<button type="submit">Submit Complaint</button>
+<div id="complaintResult" class="result"></div>
+</form>
+
+<div class="notice">Demo only: this form does not save or send complaints to authorities.</div>
+<p>Official cybercrime reporting: <a href="https://cybercrime.gov.in/" target="_blank">National Cyber Crime Portal</a></p>
+</section>
+
+<section id="schemes">
+<h2>3. Government Schemes for Women</h2>
+<div class="container">
+<div class="card">
+<h3>MyScheme Portal</h3>
+<p>Explore central and state government schemes.</p>
+<a class="btn" href="https://www.myscheme.gov.in/" target="_blank">Explore Schemes</a>
+</div>
+<div class="card">
+<h3>Women Development</h3>
+<p>Find information about women's welfare programmes.</p>
+<a class="btn" href="https://wcd.gov.in/" target="_blank">Visit WCD</a>
+</div>
+<div class="card">
+<h3>Beti Bachao Beti Padhao</h3>
+<p>Information about education and empowerment of girls.</p>
+<a class="btn" href="https://wcd.gov.in/" target="_blank">Learn More</a>
+</div>
+<div class="card">
+<h3>Self Help Groups</h3>
+<p>Explore opportunities for women's financial independence.</p>
+<a class="btn" href="https://nrlm.gov.in/" target="_blank">Explore NRLM</a>
+</div>
+</div>
+</section>
+
+<section id="eligibility">
+<h2>4. Government Scheme Eligibility Checker</h2>
+<div class="card">
+<form onsubmit="checkEligibility(event)">
+<label>Select State</label>
+<select id="eligibleState" required>
+<option value="">Choose State</option>
+<option>Tamil Nadu</option>
+<option>Karnataka</option>
+<option>Kerala</option>
+<option>Andhra Pradesh</option>
+<option>Telangana</option>
+<option>Other State / UT</option>
+</select>
+
+<label>Age Group</label>
+<select id="ageGroup" required>
+<option value="">Select Age</option>
+<option>Below 18</option>
+<option>18-25</option>
+<option>26-40</option>
+<option>41-60</option>
+<option>Above 60</option>
+</select>
+
+<label>Purpose</label>
+<select id="purpose" required>
+<option value="">Select Purpose</option>
+<option>Education</option>
+<option>Employment</option>
+<option>Business</option>
+<option>Financial Assistance</option>
+<option>Health and Welfare</option>
+<option>Safety and Protection</option>
+</select>
+
+<button type="submit">Check Eligibility Information</button>
+<div class="result" id="eligibilityResult"></div>
+</form>
+</div>
+</section>
+
+<section id="education">
+<h2>5. Education and Scholarship Opportunities</h2>
+<div class="container">
+<div class="card">
+<h3>National Scholarship Portal</h3>
+<p>Explore scholarship opportunities for eligible students.</p>
+<a class="btn" href="https://scholarships.gov.in/" target="_blank">Find Scholarships</a>
+</div>
+<div class="card">
+<h3>SWAYAM</h3>
+<p>Access online learning courses.</p>
+<a class="btn" href="https://swayam.gov.in/" target="_blank">Start Learning</a>
+</div>
+<div class="card">
+<h3>Skill India</h3>
+<p>Explore skill development and training programmes.</p>
+<a class="btn" href="https://www.skillindiadigital.gov.in/" target="_blank">Learn Skills</a>
+</div>
+</div>
+</section>
+
+<section id="jobs">
+<h2>6. Employment and Career Development</h2>
+<div class="container">
+<div class="card">
+<h3>National Career Service</h3>
+<p>Search jobs and career services.</p>
+<a class="btn" href="https://www.ncs.gov.in/" target="_blank">Find Jobs</a>
+</div>
+<div class="card">
+<h3>Women Entrepreneurship</h3>
+<p>Explore business and entrepreneurship support.</p>
+<a class="btn" href="https://www.startupindia.gov.in/" target="_blank">Startup India</a>
+</div>
+<div class="card">
+<h3>Skill Development</h3>
+<p>Find training and career development opportunities.</p>
+<a class="btn" href="https://www.skillindiadigital.gov.in/" target="_blank">Explore Training</a>
+</div>
+</div>
+</section>
+
+<section id="legal">
+<h2>7. Legal Rights and Support</h2>
+<div class="container">
+<div class="card">
+<h3>Free Legal Aid</h3>
+<p>Access legal aid information and services.</p>
+<a class="btn" href="https://nalsa.gov.in/" target="_blank">Visit NALSA</a>
+</div>
+<div class="card">
+<h3>Cyber Crime Reporting</h3>
+<p>Report cybercrime through the official portal.</p>
+<a class="btn" href="https://cybercrime.gov.in/" target="_blank">Report Cybercrime</a>
+</div>
+<div class="card">
+<h3>National Commission for Women</h3>
+<p>Find information about women's rights and complaint support.</p>
+<a class="btn" href="https://ncw.nic.in/" target="_blank">Visit NCW</a>
+</div>
+</div>
+</section>
+
+<section id="help">
+<h2>8. Women Support Assistant</h2>
+<div class="card">
+<label>Select Your Query</label>
+<select id="helpTopic">
+<option value="">Choose a topic</option>
+<option value="safety">Emergency Safety</option>
+<option value="complaint">How to Report Harassment</option>
+<option value="scheme">Government Schemes</option>
+<option value="education">Education and Scholarships</option>
+<option value="job">Employment Opportunities</option>
+<option value="legal">Legal Support</option>
+</select>
+<button onclick="getHelp()">Get Assistance</button>
+<div class="result" id="helpResult">Your guidance will appear here.</div>
+</div>
+</section>
+
+<footer>
+<h3 style="color:white">Women Safety & Development</h3>
+<p>Empowering Women Across India</p>
+<p>Safety | Equality | Education | Opportunity</p>
+<p class="small" style="color:white">College Project Prototype</p>
+</footer>
 
 <script>
-function showPage(id){
-  document.querySelectorAll("main section").forEach(function(section){
-    section.classList.remove("active");
-  });
-  document.getElementById(id).classList.add("active");
-  window.scrollTo(0,0);
+function goTo(id){
+document.getElementById(id).scrollIntoView({behavior:"smooth"});
 }
 
-function callSOS(){
-  if(confirm("Do you want to call India's emergency number 112?")){
-    window.location.href="tel:112";
-  }
+function callEmergency(){
+if(confirm("Call India's emergency number 112?")){
+window.location.href="tel:112";
+}
 }
 
 function getLocation(){
-  const output=document.getElementById("locationResult");
-  if(!navigator.geolocation){
-    output.textContent="Location is not supported by this browser.";
-    return;
-  }
-  output.textContent="Requesting location permission...";
-  navigator.geolocation.getCurrentPosition(
-    function(position){
-      const lat=position.coords.latitude;
-      const lon=position.coords.longitude;
-      output.innerHTML="Location obtained. <br>Latitude: "+lat+"<br>Longitude: "+lon+
-      '<br><a target="_blank" rel="noopener" href="https://www.google.com/maps?q='+lat+','+lon+'">View on Google Maps</a>';
-    },
-    function(){
-      output.textContent="Location permission denied or unavailable.";
-    }
-  );
+const output=document.getElementById("locationResult");
+if(!navigator.geolocation){
+output.textContent="Geolocation is not supported by this browser.";
+return;
+}
+output.textContent="Getting your location...";
+navigator.geolocation.getCurrentPosition(
+function(position){
+const lat=position.coords.latitude;
+const lon=position.coords.longitude;
+output.innerHTML="Latitude: "+lat+"<br>Longitude: "+lon+
+'<br><a target="_blank" href="https://www.google.com/maps?q='+lat+','+lon+'">Open Location in Maps</a>';
+},
+function(){
+output.textContent="Location permission denied or unavailable.";
+}
+);
 }
 
 function submitComplaint(event){
-  event.preventDefault();
-  const type=document.getElementById("complaintType").value;
-  document.getElementById("complaintResult").textContent=
-    "Demo form completed. Category: "+type+
-    ". This prototype has not sent or saved your complaint. Contact the appropriate official service for real assistance.";
+event.preventDefault();
+const type=document.getElementById("complaintType").value;
+const state=document.getElementById("complaintState").value;
+const description=document.getElementById("complaintDescription").value;
+const anonymous=document.getElementById("anonymous").checked;
+const email=document.getElementById("complaintEmail").value;
+const reference="DEMO-"+Date.now().toString().slice(-8);
+document.getElementById("complaintResult").textContent=
+"Demo submission completed. Reference: "+reference+
+". Type: "+type+". State: "+state+
+". Anonymous: "+(anonymous?"Yes":"No")+
+". This is not an official complaint and has not been transmitted.";
 }
 
 function checkEligibility(event){
-  event.preventDefault();
-  const state=document.getElementById("eligibleState").value;
-  const age=document.getElementById("ageGroup").value;
-  const purpose=document.getElementById("purpose").value;
-  document.getElementById("eligibilityResult").textContent=
-    "Your selected details: "+state+", "+age+", "+purpose+
-    ". Visit the official MyScheme portal to check actual scheme eligibility and required documents.";
+event.preventDefault();
+const state=document.getElementById("eligibleState").value;
+const age=document.getElementById("ageGroup").value;
+const purpose=document.getElementById("purpose").value;
+document.getElementById("eligibilityResult").textContent=
+"Your selections: "+state+", "+age+", "+purpose+
+". Check official scheme conditions, income limits and documents at myscheme.gov.in. This demo does not determine official eligibility.";
 }
 
 function getHelp(){
-  const topic=document.getElementById("helpTopic").value;
-  const answers={
-    safety:"If you are in immediate danger in India, call 112.",
-    complaint:"For cybercrime, visit cybercrime.gov.in. For other complaints, contact the relevant police or official support service.",
-    scheme:"Visit myscheme.gov.in to explore central and state government schemes.",
-    education:"Visit scholarships.gov.in to explore scholarships.",
-    job:"Visit ncs.gov.in for employment services.",
-    legal:"Visit nalsa.gov.in for legal aid information."
-  };
-  document.getElementById("helpResult").textContent=
-    answers[topic] || "Please select a topic.";
+const topic=document.getElementById("helpTopic").value;
+const answers={
+safety:"If you are in immediate danger in India, call 112.",
+complaint:"For cybercrime, visit cybercrime.gov.in. For other complaints, contact the appropriate police service.",
+scheme:"Visit myscheme.gov.in to explore government schemes.",
+education:"Visit scholarships.gov.in to explore scholarships.",
+job:"Visit ncs.gov.in for employment services.",
+legal:"Visit nalsa.gov.in for legal aid information."
+};
+document.getElementById("helpResult").textContent=
+answers[topic]||"Please select a topic.";
 }
 </script>
+
+<script>
+function googleTranslateElementInit(){
+new google.translate.TranslateElement(
+{pageLanguage:"en",includedLanguages:"as,bn,brx,doi,gu,hi,kn,ks,kok,mai,ml,mni,mr,ne,or,pa,sa,sat,sd,ta,te,ur,en",
+layout:google.translate.TranslateElement.InlineLayout.SIMPLE},
+"google_translate_element"
+);
+}
+</script>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 </body>
 </html>
