@@ -452,54 +452,40 @@ function trackComplaint() {
 }
 </script>
 <!-- END COMPLAINT TRACKING -->
-<!-- AUTOMATIC COMPLAINT ID GENERATION -->
+<!-- CONNECT COMPLAINT SUBMISSION WITH TRACKING -->
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  const forms = document.querySelectorAll("form");
 
-  const complaintForm = Array.from(forms).find(form =>
-    form.querySelector("textarea")
-  );
-
+  const complaintForm = document.querySelector("form");
   if (!complaintForm) return;
 
-  complaintForm.addEventListener("submit", function (event) {
-    event.preventDefault();
-    event.stopImmediatePropagation();
+  complaintForm.addEventListener("submit", function () {
 
-    const message = complaintForm.querySelector("textarea").value.trim();
+    setTimeout(function () {
+      const reference = "DEMO-" + Math.floor(10000000 + Math.random() * 90000000);
 
-    if (!message) {
-      alert("Please enter your complaint.");
-      return;
-    }
+      const complaints = JSON.parse(
+        localStorage.getItem("womenComplaints") || "[]"
+      );
 
-    const id = "WSD-" + Date.now();
+      complaints.push({
+        id: reference,
+        status: "Received",
+        message: "Demo complaint submitted"
+      });
 
-    const complaints = JSON.parse(
-      localStorage.getItem("womenComplaints") || "[]"
-    );
+      localStorage.setItem(
+        "womenComplaints",
+        JSON.stringify(complaints)
+      );
 
-    complaints.push({
-      id: id,
-      message: message,
-      status: "Received",
-      date: new Date().toLocaleDateString()
-    });
+      alert("Your Complaint ID: " + reference);
 
-    localStorage.setItem(
-      "womenComplaints",
-      JSON.stringify(complaints)
-    );
+    }, 100);
 
-    alert(
-      "Complaint submitted successfully!\nYour Complaint ID: " + id
-    );
-
-    complaintForm.reset();
-  }, true);
+  });
 });
 </script>
-<!-- END AUTOMATIC COMPLAINT ID -->
+<!-- END COMPLAINT TRACKING CONNECTION -->
 </body>
 </html>
