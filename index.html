@@ -551,5 +551,81 @@ function updateComplaintStatus() {
 }
 </script>
 <!-- END ADMIN STATUS UPDATE -->
+<!-- USER REGISTRATION AND LOGIN -->
+<section id="user-account" style="padding:25px; margin:20px; background:#fff0f5; border-radius:12px;">
+  <h2>Women Safety & Development - User Account</h2>
+
+  <div id="registerBox">
+    <h3>Create Your Account</h3>
+    <input id="regName" type="text" placeholder="Enter Your Name" style="padding:12px;width:90%;margin:6px 0;">
+    <input id="regEmail" type="email" placeholder="Enter Your Email" style="padding:12px;width:90%;margin:6px 0;">
+    <input id="regPassword" type="password" placeholder="Create Password" style="padding:12px;width:90%;margin:6px 0;">
+    <button onclick="registerUser()" style="padding:12px;background:#8e2456;color:white;border:0;border-radius:6px;">Create Account</button>
+  </div>
+
+  <hr>
+
+  <div id="loginBox">
+    <h3>Login</h3>
+    <input id="loginEmail" type="email" placeholder="Enter Your Email" style="padding:12px;width:90%;margin:6px 0;">
+    <input id="loginPassword" type="password" placeholder="Enter Password" style="padding:12px;width:90%;margin:6px 0;">
+    <button onclick="loginUser()" style="padding:12px;background:#8e2456;color:white;border:0;border-radius:6px;">Login</button>
+    <p><a href="#" onclick="forgotPassword();return false;">Forgot Password?</a></p>
+  </div>
+
+  <div id="accountResult" style="margin-top:15px;font-weight:bold;"></div>
+</section>
+
+<script>
+function registerUser() {
+  const name = document.getElementById("regName").value.trim();
+  const email = document.getElementById("regEmail").value.trim().toLowerCase();
+  const password = document.getElementById("regPassword").value;
+  const result = document.getElementById("accountResult");
+
+  if (!name || !email || !password) {
+    result.textContent = "Please fill all registration fields.";
+    return;
+  }
+
+  if (password.length < 6) {
+    result.textContent = "Password must contain at least 6 characters.";
+    return;
+  }
+
+  const users = JSON.parse(localStorage.getItem("wsdUsers") || "[]");
+
+  if (users.some(user => user.email === email)) {
+    result.textContent = "This email is already registered.";
+    return;
+  }
+
+  users.push({name, email, password});
+  localStorage.setItem("wsdUsers", JSON.stringify(users));
+
+  result.textContent = "Demo account created successfully! Please login.";
+}
+
+function loginUser() {
+  const email = document.getElementById("loginEmail").value.trim().toLowerCase();
+  const password = document.getElementById("loginPassword").value;
+  const users = JSON.parse(localStorage.getItem("wsdUsers") || "[]");
+  const user = users.find(u => u.email === email && u.password === password);
+  const result = document.getElementById("accountResult");
+
+  if (!user) {
+    result.textContent = "Invalid email or password.";
+    return;
+  }
+
+  result.textContent = "Welcome, " + user.name + "! Demo login successful.";
+}
+
+function forgotPassword() {
+  document.getElementById("accountResult").textContent =
+    "Please contact the project administrator for demo account recovery.";
+}
+</script>
+<!-- END USER ACCOUNT -->
 </body>
 </html>
