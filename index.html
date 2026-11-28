@@ -411,6 +411,46 @@ layout:google.translate.TranslateElement.InlineLayout.SIMPLE},
 }
 </script>
 <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<!-- COMPLAINT TRACKING SECTION -->
+<section id="tracking" style="padding:30px; background:#fff0f5; border-radius:12px; margin:20px;">
+  <h2>Track Your Complaint</h2>
+  <p>Enter your Complaint ID to check your complaint status.</p>
 
+  <input type="text" id="trackID" placeholder="Enter Complaint ID"
+    style="padding:12px; width:70%; max-width:350px;">
+
+  <button onclick="trackComplaint()"
+    style="padding:12px; background:#8e2456; color:white; border:0; border-radius:6px;">
+    Track Complaint
+  </button>
+
+  <div id="trackingResult" style="margin-top:20px;"></div>
+</section>
+
+<script>
+function trackComplaint() {
+  const id = document.getElementById("trackID").value.trim();
+  const complaints = JSON.parse(localStorage.getItem("womenComplaints") || "[]");
+  const result = document.getElementById("trackingResult");
+
+  if (!id) {
+    result.innerHTML = "Please enter your Complaint ID.";
+    return;
+  }
+
+  const complaint = complaints.find(c => c.id === id);
+
+  if (complaint) {
+    result.innerHTML =
+      "<h3>Complaint Found</h3>" +
+      "<p><b>Complaint ID:</b> " + complaint.id + "</p>" +
+      "<p><b>Status:</b> " + complaint.status + "</p>" +
+      "<p><b>Message:</b> " + complaint.message + "</p>";
+  } else {
+    result.innerHTML = "Complaint ID not found.";
+  }
+}
+</script>
+<!-- END COMPLAINT TRACKING -->
 </body>
 </html>
