@@ -627,5 +627,72 @@ function forgotPassword() {
 }
 </script>
 <!-- END USER ACCOUNT -->
+<!-- USER DASHBOARD -->
+<section id="userDashboard" style="display:none; padding:25px; margin:20px; background:#fff0f5; border-radius:12px;">
+  <h2 id="dashboardWelcome">Welcome!</h2>
+  <h3>Women Safety & Development Dashboard</h3>
+  <p>Welcome to your personal dashboard.</p>
+
+  <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px;">
+    <a href="#tracking" style="padding:18px; background:white; border-radius:10px; text-decoration:none; color:#8e2456;">
+      <h3>My Complaints</h3>
+      <p>View and track complaints</p>
+    </a>
+
+    <a href="#schemes" style="padding:18px; background:white; border-radius:10px; text-decoration:none; color:#8e2456;">
+      <h3>Government Schemes</h3>
+      <p>Explore schemes</p>
+    </a>
+
+    <a href="#education" style="padding:18px; background:white; border-radius:10px; text-decoration:none; color:#8e2456;">
+      <h3>Education</h3>
+      <p>Explore learning opportunities</p>
+    </a>
+
+    <a href="#employment" style="padding:18px; background:white; border-radius:10px; text-decoration:none; color:#8e2456;">
+      <h3>Employment</h3>
+      <p>Explore job opportunities</p>
+    </a>
+
+    <a href="#legal" style="padding:18px; background:white; border-radius:10px; text-decoration:none; color:#8e2456;">
+      <h3>Legal Help</h3>
+      <p>Know your rights</p>
+    </a>
+  </div>
+
+  <button onclick="logoutUser()" style="margin-top:20px; padding:12px 25px; background:#8e2456; color:white; border:0; border-radius:6px;">
+    Logout
+  </button>
+</section>
+
+<script>
+function loginUser() {
+  const email = document.getElementById("loginEmail").value.trim().toLowerCase();
+  const password = document.getElementById("loginPassword").value;
+  const users = JSON.parse(localStorage.getItem("wsdUsers") || "[]");
+  const user = users.find(u => u.email === email && u.password === password);
+  const result = document.getElementById("accountResult");
+
+  if (!user) {
+    result.textContent = "Invalid email or password.";
+    return;
+  }
+
+  document.getElementById("registerBox").style.display = "none";
+  document.getElementById("loginBox").style.display = "none";
+  document.getElementById("userDashboard").style.display = "block";
+  document.getElementById("dashboardWelcome").textContent = "Welcome, " + user.name + "!";
+  result.textContent = "Login successful!";
+  document.getElementById("userDashboard").scrollIntoView({behavior:"smooth"});
+}
+
+function logoutUser() {
+  document.getElementById("userDashboard").style.display = "none";
+  document.getElementById("registerBox").style.display = "block";
+  document.getElementById("loginBox").style.display = "block";
+  document.getElementById("accountResult").textContent = "You have logged out.";
+}
+</script>
+<!-- END USER DASHBOARD -->
 </body>
 </html>
