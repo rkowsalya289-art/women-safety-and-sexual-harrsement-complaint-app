@@ -452,5 +452,54 @@ function trackComplaint() {
 }
 </script>
 <!-- END COMPLAINT TRACKING -->
+<!-- AUTOMATIC COMPLAINT ID GENERATION -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const forms = document.querySelectorAll("form");
+
+  const complaintForm = Array.from(forms).find(form =>
+    form.querySelector("textarea")
+  );
+
+  if (!complaintForm) return;
+
+  complaintForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+
+    const message = complaintForm.querySelector("textarea").value.trim();
+
+    if (!message) {
+      alert("Please enter your complaint.");
+      return;
+    }
+
+    const id = "WSD-" + Date.now();
+
+    const complaints = JSON.parse(
+      localStorage.getItem("womenComplaints") || "[]"
+    );
+
+    complaints.push({
+      id: id,
+      message: message,
+      status: "Received",
+      date: new Date().toLocaleDateString()
+    });
+
+    localStorage.setItem(
+      "womenComplaints",
+      JSON.stringify(complaints)
+    );
+
+    alert(
+      "Complaint submitted successfully!\nYour Complaint ID: " + id
+    );
+
+    complaintForm.reset();
+  }, true);
+});
+</script>
+<!-- END AUTOMATIC COMPLAINT ID -->
 </body>
 </html>
