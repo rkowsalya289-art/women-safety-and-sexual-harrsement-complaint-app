@@ -1,27 +1,71 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Women Safety App</title>
-</head>
-<body>
 
-    <h1>Women Safety & Support</h1>
+<script>
+function showPage(id){
+  document.querySelectorAll("main section").forEach(function(section){
+    section.classList.remove("active");
+  });
+  document.getElementById(id).classList.add("active");
+  window.scrollTo(0,0);
+}
 
-    <p>Your safety matters. You are not alone.</p>
+function callSOS(){
+  if(confirm("Do you want to call India's emergency number 112?")){
+    window.location.href="tel:112";
+  }
+}
 
-    <h2>Submit a Complaint</h2>
+function getLocation(){
+  const output=document.getElementById("locationResult");
+  if(!navigator.geolocation){
+    output.textContent="Location is not supported by this browser.";
+    return;
+  }
+  output.textContent="Requesting location permission...";
+  navigator.geolocation.getCurrentPosition(
+    function(position){
+      const lat=position.coords.latitude;
+      const lon=position.coords.longitude;
+      output.innerHTML="Location obtained. <br>Latitude: "+lat+"<br>Longitude: "+lon+
+      '<br><a target="_blank" rel="noopener" href="https://www.google.com/maps?q='+lat+','+lon+'">View on Google Maps</a>';
+    },
+    function(){
+      output.textContent="Location permission denied or unavailable.";
+    }
+  );
+}
 
-    <form>
-        <label>Describe your complaint:</label>
-        <br>
-        <textarea placeholder="Enter your complaint"></textarea>
-        <br><br>
-        <button type="button">Submit Complaint</button>
-    </form>
+function submitComplaint(event){
+  event.preventDefault();
+  const type=document.getElementById("complaintType").value;
+  document.getElementById("complaintResult").textContent=
+    "Demo form completed. Category: "+type+
+    ". This prototype has not sent or saved your complaint. Contact the appropriate official service for real assistance.";
+}
 
-    <h2>Emergency Help</h2>
+function checkEligibility(event){
+  event.preventDefault();
+  const state=document.getElementById("eligibleState").value;
+  const age=document.getElementById("ageGroup").value;
+  const purpose=document.getElementById("purpose").value;
+  document.getElementById("eligibilityResult").textContent=
+    "Your selected details: "+state+", "+age+", "+purpose+
+    ". Visit the official MyScheme portal to check actual scheme eligibility and required documents.";
+}
 
-    <button type="button">Emergency SOS</button>
+function getHelp(){
+  const topic=document.getElementById("helpTopic").value;
+  const answers={
+    safety:"If you are in immediate danger in India, call 112.",
+    complaint:"For cybercrime, visit cybercrime.gov.in. For other complaints, contact the relevant police or official support service.",
+    scheme:"Visit myscheme.gov.in to explore central and state government schemes.",
+    education:"Visit scholarships.gov.in to explore scholarships.",
+    job:"Visit ncs.gov.in for employment services.",
+    legal:"Visit nalsa.gov.in for legal aid information."
+  };
+  document.getElementById("helpResult").textContent=
+    answers[topic] || "Please select a topic.";
+}
+</script>
 
 </body>
 </html>
